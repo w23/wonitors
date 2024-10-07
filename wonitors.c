@@ -134,7 +134,7 @@ static BOOL readEdidForDisplayPath(const char *monitor_id, EDID *out_edid) {
 	return result;
 }
 
-static BOOL readEdidFrorDisplayName(LPSTR device_name, EDID *out_edid) {
+static BOOL readEdidFromDisplayName(LPSTR device_name, EDID *out_edid) {
 	// EDD_GET_DEVICE_INTERFACE_NAME specifies that DISPLAY_DEVICE.DeviceID field
 	// will contain interface name that is congruent to GUID_DEVINTERFACE_MONITOR
 	// detail DevicePath. This is used in readEdidForDisplayPath().
@@ -227,7 +227,7 @@ static BOOL CALLBACK monitorEnumProc(HMONITOR hMonitor, HDC hdcMonitor, LPRECT l
 			.h = dev_mode.dmPelsHeight,
 			.raw_dpi = raw_dpi_x,
 	};
-	if (!readEdidFrorDisplayName(minfo.szDevice, &info.edid)) {
+	if (!readEdidFromDisplayName(minfo.szDevice, &info.edid)) {
 		LOGF("  Couldn't read EDID for this monitor, oh well");
 		return TRUE;
 	}
